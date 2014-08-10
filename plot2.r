@@ -1,0 +1,12 @@
+setwd("/Users/adaniel/Documents/personal/2014/Coursera/eda_proj1/")
+data1 <- read.table(file="/Users/adaniel/Documents/personal/2014/Coursera/eda_proj1/household_power_consumption.txt", sep=";", na.strings = "?", header=TRUE )
+data2 <- subset(data1, (data1[,1]=="2/2/2007" | data1[,1]=="1/2/2007"))
+data2$Date <- strptime(paste(data2$Date,data2$Time), "%d/%m/%Y %H:%M:%S")
+#data2["Day"] <- NA
+# data2$Day <- weekdays(data2$Date)
+data2[,3] <- as.numeric(data2[,3])
+png(file = "plot2.png", width = 480 , height = 480)
+with( data2, plot(data2$Date, data2[,3], type = "l", ylab = "Global Active Power (kilowatts)", xlab = ""))
+# title (main = " Global Active Power " , xlab = "Global Active Power (kilowatts)" )
+dev.off()
+# graphics.off()
